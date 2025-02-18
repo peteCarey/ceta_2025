@@ -9,26 +9,74 @@ export class UserService {
     protected userDetailsList: IUser[] = [
         {
             id: 0,
-            name: 'Acme Fresh Start Housing',
-            city: 'Chicago',
-            zipcode: 'IL',
-            photo: `${this.baseUrl}/bernard-hermant-CLKGGwIBTaY-unsplash.jpg`,
-            website: "www.youtube.com",
-            company: "bloggs",
+            name: 'Clementina DuBuque',
+            username: 'Moriah.Stanton',
+            email: 'Rey.Padberg@karina.biz',
+             address: {
+                street: "Kulas Light",
+                suite: "Apt. 556",
+                city: "Chicargo",
+                zipcode: "IL",
+                geo: {
+                    lat: "-37.3159",
+                    lng: "81.1496"
+                }
+            },
             phone: "0151 652 2868",
-            username: '',
-            email: '',
-            address: undefined,
-            street: '',
-            suite: '',
-            geo: undefined,
-            lat: '',
-            lng: '',
-            _name: '',
-            catchPhrase: '',
-            bs: ''
+            website: "ambrose.net",
+            company: {
+                name: "Romaguera-Crona",
+                catchPhrase: "Multi-layered client-server neural-net",
+                bs: "https://angular.dev/assets/images/tutorials/common/i-do-nothing-but-love-lAyXdl1-Wmc-unsplash.jpg"
+            },   
+        },    
+        {
+            id: 1,
+            name: "Leanne Graham",
+            username: "Bret",
+            email: "Sincere@april.biz",
+            address: {
+                street: "Kulas Light",
+                suite: "Apt. 556",
+                city: "Gwenborough",
+                zipcode: "92998-3874",
+                geo: {
+                    lat: "-37.3159",
+                    lng: "81.1496"
+                }
+            },
+            phone: "1-770-736-8031 x56442",
+            website: "hildegard.org",
+            company: {
+                name: "Romaguera-Crona",
+                catchPhrase: "Multi-layered client-server neural-net",
+                bs:  `${this.baseUrl}/bernard-hermant-CLKGGwIBTaY-unsplash.jpg`,
+            },
         },
-    ]
+        {
+            id: 2,
+            name: "Ervin Howell",
+            username: "Antonette",
+            email: "Shanna@melissa.tv",
+            address: {
+                street: "Victor Plains",
+                suite: "Suite 879",
+                city: "Wisokyburgh",
+                zipcode: "90566-7771",
+                geo: {
+                    lat: "-43.9509",
+                    lng: "-34.4618"
+                }
+            },
+            phone: "010-692-6593 x09125",
+            website: "anastasia.net",
+            company: {
+                name: "Deckow-Crist",
+                catchPhrase: "Proactive didactic contingency",
+                bs: "https://angular.dev/assets/images/tutorials/common/brandon-griggs-wR11KBaB86U-unsplash.jpg"
+            },
+        },
+];
 
 
     getAllUsers(): IUser[] {

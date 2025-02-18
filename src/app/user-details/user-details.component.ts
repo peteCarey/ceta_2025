@@ -10,27 +10,33 @@ import {RouterModule} from '@angular/router';
   selector: 'app-user-details',
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   template: `
-    <article>
+    <article *ngIf="userDetails">
       <img
         class="listing-photo"
-        [src]="userDetails.photo"
+        [src]="userDetails.company.bs"
         alt="Exterior photo of {{ userDetails.name }}"
         crossorigin
       />
       <section class="listing-description">
         <h2 class="listing-heading">{{ userDetails.name }}</h2>
-        <p class="listing-location">{{ userDetails.city }}, {{ userDetails.street }}</p>
+        <p class="listing-location">{{ userDetails.address.city }}, {{ userDetails.address.street }}</p>
       </section>
       <section class="listing-features">
-        <h2 class="section-heading">About this housing location</h2>
+        <h2 class="section-heading">User Details</h2>
         <ul>
-          <li>Units available: {{ userDetails.name }}</li>
-          <li>Does this location have wifi: {{ userDetails.website }}</li>
-          <li>Does this location have laundry: {{ userDetails.website }}</li>
+          <li>Name: {{ userDetails.name }}</li>
+          <li>Preferred Name: {{ userDetails.username }}</li>
+          <li>email: {{ userDetails.email }}</li>
+          address:
+          <li>street: {{ userDetails.address.street }}</li>
+          <li>suite: {{ userDetails.address.suite }}</li>
+          <li>city: {{ userDetails.address.city }}</li>
+          
+
         </ul>
       </section>
       <section class="listing-apply">
-        <h2 class="section-heading">Apply now to live here</h2>
+        <h2 class="section-heading">Update</h2>
         <form [formGroup]="applyForm" (submit)="submitApplication()">
           <label for="first-name">First Name</label>
           <input id="first-name" type="text" formControlName="firstName" />
@@ -38,13 +44,13 @@ import {RouterModule} from '@angular/router';
           <input id="last-name" type="text" formControlName="lastName" />
           <label for="email">Email</label>
           <input id="email" type="email" formControlName="email" />
-          <button type="submit" class="primary">Apply now</button>
+          <button type="submit" class="primary">Update</button>
         </form>
         <a [routerLink]="['/user-details', userDetails.id]">Learn More</a>
       </section>
     </article>
   `,
-  styles: ``
+ styleUrls: ['./user-details.component.css'],
 })
 export class UserDetailsComponent {
     @Input() userDetails!: IUser;
@@ -56,8 +62,35 @@ export class UserDetailsComponent {
 
     constructor() {
         this.userDetailsId = Number(this.route.snapshot.params['id']);
-        this.user = this.userService. getUserDetailsById(this.userDetailsId);
+        // this.user = this.userService. getUserDetailsById(this.userDetailsId);
+        // console.log("user is " + this.user)
     }
+
+    ngOnInit() {
+    this.userDetails = this.userService.getUserDetailsById(this.userDetailsId) ?? {
+      id: -1,
+      name: '',
+      username: '',
+      email: '',
+      address: {
+        street: '',
+        suite: '',
+        city: '',
+        zipcode: '',
+        geo: {
+          lat: '',
+          lng: '',
+        },
+      },
+      phone: '',
+      website: '',
+      company: {
+        name: '',
+        catchPhrase: '',
+        bs: '',
+      },
+    };
+  }
 
     applyForm = new FormGroup({
         firstName: new FormControl(''),

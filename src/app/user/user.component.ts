@@ -1,8 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { UserDetailsComponent } from '../user-details/user-details.component';
-import { UserService } from '../user.service';
 import { IUser } from 'src/user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +17,7 @@ import { IUser } from 'src/user';
 
      <section class="results">
       <app-user-details
-        *ngFor="let userDetails of userDetailsList"
+        *ngFor="let userDetails of filteredDetailsList"
         [userDetails]="userDetails"
       ></app-user-details>
     </section>
@@ -30,21 +30,17 @@ export class UserComponent {
   userService:UserService = inject(UserService);
 
   constructor() {
-    this.userDetailsList = this.userService.getAllUsers();
+     this.userDetailsList = this.userService.getAllUsers();
     this.filteredDetailsList = this.userDetailsList;
-    console.log(this.userDetailsList)
-  }
-
+    console.log("User details list is", this.userDetailsList);
+    }
   filterResults(text: string) {
     if (!text) {
-      this.filteredDetailsList = this.userDetailsList;
+        this.filteredDetailsList = this.userDetailsList;
     } else {
-      this.filteredDetailsList = this.userDetailsList.filter((user) =>
-        user.city.toLowerCase().includes(text.toLowerCase())
+        this.filteredDetailsList = this.userDetailsList.filter((user) =>
+        user.address.city.toLowerCase().includes(text.toLowerCase())
       );
     }
   }
-
-  
- 
 }

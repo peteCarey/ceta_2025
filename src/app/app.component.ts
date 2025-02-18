@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import { UserComponent } from './user/user.component';
 import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [UserComponent, RouterModule],
+  imports: [ RouterModule],
   template: `
     <h1>CETA</h1>
     <main>
