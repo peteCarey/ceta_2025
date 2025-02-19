@@ -5,6 +5,11 @@
   border-radius: 30px;
   float: right;
 }
+
+.listing-description{
+  background-color:pink;
+  border: solid;
+}
 .listing-heading {
   font-size: 48pt;
   font-weight: bold;
@@ -25,6 +30,8 @@
 }
 .listing-features {
   margin-bottom: 20px;
+  border: solid;
+  background-color: yellow;
 }
 .listing-features li {
   font-size: 14pt;
@@ -36,6 +43,13 @@ li {
   font-size: 18pt;
   margin-bottom: 15px;
 }
+
+.listing-apply {
+  font-size: 18pt;
+  margin-bottom: 15px;
+  border: solid;
+}
+
 label, input {
   display: block;
 }

@@ -10,37 +10,41 @@ import { UserService } from '../user.service';
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city" />
-        <button class="primary" type="button">Search</button>
+        <input type="text" placeholder="Filter by city" #filter />
+        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
 
-     <section class="results">
-      <app-user-details
-        *ngFor="let userDetails of filteredDetailsList"
-        [userDetails]="userDetails"
-      ></app-user-details>
+    <section class="results">
+        <app-user-details
+            *ngFor="let userDetails of filteredDetailsList"
+            [userDetails] ="userDetails"
+        ></app-user-details>
     </section>
   `,
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
-  userDetailsList:IUser[] =[];
-  filteredDetailsList: IUser[] = [];
+  userDetailsList:IUser[] = [];
   userService:UserService = inject(UserService);
-
+  filteredDetailsList: IUser[] = [];
+  
   constructor() {
-     this.userDetailsList = this.userService.getAllUsers();
-    this.filteredDetailsList = this.userDetailsList;
-    console.log("User details list is", this.userDetailsList);
-    }
+    this.userService.getAllUsers().then((userDetailsList: IUser[]) => {
+        this.userDetailsList = userDetailsList;
+        this.filteredDetailsList = userDetailsList;
+        console.log("User details list is", this.filteredDetailsList[0].name);
+    })
+  }
   filterResults(text: string) {
     if (!text) {
         this.filteredDetailsList = this.userDetailsList;
-    } else {
-        this.filteredDetailsList = this.userDetailsList.filter((user) =>
-        user.address.city.toLowerCase().includes(text.toLowerCase())
+        return;
+    } 
+    
+        this.filteredDetailsList = this.userDetailsList.filter((userDetails) =>
+        userDetails?.address.city.toLowerCase().includes(text.toLowerCase())
       );
-    }
+    
   }
 }
