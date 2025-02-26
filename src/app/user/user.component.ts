@@ -6,6 +6,7 @@ import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user',
+  standalone: true,
   imports: [CommonModule, UserDetailsComponent],
   template: `
     <section>
